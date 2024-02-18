@@ -46,7 +46,7 @@ body{
     line-height: 1.5;
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
-    padding: 35px 15px;
+    padding: 35px 9px;
 }
 body.hide-scrolling{
     overflow-y: hidden;
@@ -138,7 +138,7 @@ section.fade-out{
 custom scrollbar
 --------------------*/
 ::-webkit-scrollbar{
-    width:5px;
+    width:0px;
 }
 ::-webkit-scrollbar-track{
     background-color: var(--white);
@@ -206,6 +206,14 @@ button{
         opacity: 0;
     }
 }
+@keyframes spin{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
 /* overlay */
 .overlay{
     position: fixed;
@@ -219,6 +227,49 @@ button{
 }
 .overlay.active{
     visibility: visible;
+}
+/* Page loader */
+.page-loader{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    background-color: var(--white-alpha-25);
+    backdrop-filter: var(--backdrop-filter-blur);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease;  
+}
+.page-loader.fade-out{
+    opacity: 0;
+}
+.page-loader div{
+    border:2px solid transparent;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+    animation: spin 1s linear infinite;
+}
+.page-loader div:nth-child(1){
+    height: 60px;
+    width: 60px;
+    border-color: var(--main-color);
+}
+.page-loader div:nth-child(2){
+    height: 45px;
+    width: 45px;
+    border-color: var(--blue);
+    animation-duration: 1.2s;
+}
+.page-loader div:nth-child(3){
+    height: 30px;
+    width: 30px;
+    border-color: var(--orange);
 }
 
 /* header */
@@ -374,7 +425,7 @@ button{
     padding: 15px;
  }
  .home-text p{
-    font-size: 18px;
+    font-size: 25px;
  }
  .home-text h1{
     font-size: 50px;
@@ -703,4 +754,68 @@ Portfolio section
 .contact-info-item .social-links a:hover{
     color: var(--white);
     background-color: var(--main-color);
+}
+
+/* Responsive */
+@media(max-width:991px){
+    .container{
+        padding: 0;
+    }
+    .home-text,
+    .home-img{
+        width:100%;
+    }
+    .home-text{
+        text-align: center;
+    }
+    .home-img{
+        order:-1;
+    }
+    .home-img .img-box{
+        max-width: 300px;
+    }
+    .home-text .btn{
+        margin: 0 7px 15px;
+    }
+    .portfolio-item{
+        width:calc(50% - 30px)
+    }
+}
+@media(max-width:767px){
+    .contact-form,
+    .contact-info,
+    .about-img,
+    .about-text{
+        width: 100%;
+    }
+    .about-text{
+        margin-top:30px;
+    }
+    .portfolio-item{
+        width:calc(100% - 30%);
+    }
+    .pp-inner{
+        padding:30px 15px;
+    }
+    .contact-info{
+        order:-1;
+    }
+}
+@media(max-width:575px){
+    .section-title h2,
+    .header .nav-inner ul li a{
+        font-size: x-large;
+    }
+    .home-text h1{
+        font-size: 30px;
+    }
+    .home-text h2{
+        font-size: 18px;
+    }
+    .home-text p{
+        font-size: 20px;
+     }
+    .pp-header h3{
+        font-size: 20px;
+    }
 }
